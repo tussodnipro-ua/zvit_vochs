@@ -8,197 +8,139 @@
         :root {
             --tg-bg: var(--tg-theme-bg-color, #ffffff);
             --tg-text: var(--tg-theme-text-color, #000000);
-            --tg-hint: var(--tg-theme-hint-color, #999999);
-            --tg-link: var(--tg-theme-link-color, #248bcf);
             --tg-primary: var(--tg-theme-button-color, #248bcf);
-            --tg-primary-text: var(--tg-theme-button-text-color, #ffffff);
+            --tg-hint: var(--tg-theme-hint-color, #999999);
             --tg-sec-bg: var(--tg-theme-secondary-bg-color, #f0f0f0);
         }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--tg-bg);
-            color: var(--tg-text);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Навігація */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--tg-hint);
-            background: var(--tg-bg);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .tab-button {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: none;
-            color: var(--tg-text);
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            opacity: 0.6;
-            transition: 0.3s;
-        }
-
-        .tab-button.active {
-            opacity: 1;
-            border-bottom: 3px solid var(--tg-primary);
-            color: var(--tg-primary);
-        }
-
-        /* Контент */
-        .tab-content {
-            display: none;
-            padding: 20px;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Стилі для заголовка та картинки */
-        .header-section { text-align: center; margin-bottom: 20px; }
-        .site-title { font-size: 24px; margin: 10px 0; }
-        .header-image { 
-            width: 100%; 
-            max-width: 400px; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        input, textarea, button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: 1px solid var(--tg-hint);
-            border-radius: 10px;
-            box-sizing: border-box;
-            background: var(--tg-bg);
-            color: var(--tg-text);
-            font-size: 16px;
-        }
-
-        button {
-            background-color: var(--tg-primary);
-            color: var(--tg-primary-text);
-            border: none;
-            font-weight: bold;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-
-        .user-info {
+        body { font-family: sans-serif; background: var(--tg-bg); color: var(--tg-text); margin: 0; padding: 15px; }
+        
+        /* Спільний довідник зверху */
+        .master-section {
             background: var(--tg-sec-bg);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             margin-bottom: 15px;
-            font-size: 13px;
-            color: var(--tg-hint);
+            border: 1px solid var(--tg-hint);
         }
+        .master-section label { font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px; }
+
+        /* Навігація вкладок */
+        .tabs { display: flex; gap: 5px; margin-bottom: 15px; overflow-x: auto; }
+        .tab-btn { 
+            padding: 10px 15px; border-radius: 20px; border: 1px solid var(--tg-primary);
+            background: none; color: var(--tg-primary); cursor: pointer; white-space: nowrap; font-size: 12px;
+        }
+        .tab-btn.active { background: var(--tg-primary); color: white; }
+
+        /* Контент вкладок */
+        .tab-content { display: none; background: var(--tg-bg); border: 1px solid var(--tg-hint); padding: 15px; border-radius: 12px; }
+        .tab-content.active { display: block; }
+
+        select, input, textarea { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid var(--tg-hint); background: var(--tg-bg); color: var(--tg-text); box-sizing: border-box; }
+        button.submit-btn { width: 100%; padding: 15px; background: var(--tg-primary); color: white; border: none; border-radius: 10px; font-weight: bold; margin-top: 10px; }
+        
+        h3 { margin-top: 0; color: var(--tg-primary); }
     </style>
 </head>
 <body>
 
+    <div class="master-section">
+        <label>📍 Оберіть об'єкт (Спільний для всіх):</label>
+        <select id="masterDropdown">
+            <option>Завантаження довідника...</option>
+        </select>
+    </div>
+
     <div class="tabs">
-        <button class="tab-button active" onclick="openTab(event, 'tab1')">Нова зміна</button>
-        <button class="tab-button" onclick="openTab(event, 'tab2')">Зоборонені предмети</button>
-        <button class="tab-button" onclick="openTab(event, 'tab3')">Форма №2</button>
+        <button class="tab-btn active" onclick="showTab(1)">🚚 Логістика</button>
+        <button class="tab-btn" onclick="showTab(2)">💰 Фінанси</button>
+        <button class="tab-btn" onclick="showTab(3)">📦 Склад</button>
+        <button class="tab-btn" onclick="showTab(4)">📝 Нотатки</button>
     </div>
 
     <div id="tab1" class="tab-content active">
-        <div class="header-section">
-            <h1 class="site-title">Вказуємо заступаючий наряд</h1>
-            <img src="https://via.placeholder.com/600x300.png?text=Welcome+Image" alt="Banner" class="header-image">
-        </div>
-        <h2>Вітаємо!</h2>
-        <p>Це головна сторінка вашого додатку. Тут можна розмістити важливі новини або вітальне слово.</p>
+        <h3>Транспортні дані</h3>
+        <input type="text" id="t1_num" placeholder="Номер авто">
+        <input type="text" id="t1_driver" placeholder="ПІБ водія">
+        <button class="submit-btn" onclick="sendForm(1, ['t1_num', 't1_driver'])">Відправити в Книгу 1</button>
     </div>
 
     <div id="tab2" class="tab-content">
-        <div id="userInfoDisplay" class="user-info"></div>
-        <h2>Виявлено заборонені предмети, а саме:</h2>
-        <input type="text" id="userName" placeholder="Ваше ім'я">
-        <input type="tel" id="userPhone" placeholder="Ваш телефон">
-        <textarea id="userMsg" placeholder="Ваше повідомлення" rows="4"></textarea>
-        <button onclick="sendData()">Надіслати дані</button>
+        <h3>Касовий звіт</h3>
+        <input type="number" id="t2_amount" placeholder="Сума грн">
+        <select id="t2_type"><option>Прихід</option><option>Розхід</option></select>
+        <button class="submit-btn" onclick="sendForm(2, ['t2_amount', 't2_type'])">Відправити в Книгу 2</button>
     </div>
 
     <div id="tab3" class="tab-content">
-        <h2>Форма №2 (по закінченю роботи суду)</h2>
-        <p>Ми збираємо дані для покращення нашого сервісу.</p>
-        <a href="#" style="color: var(--tg-link);">Наш веб-сайт</a>
+        <h3>Інвентаризація</h3>
+        <input type="text" id="t3_item" placeholder="Назва товару">
+        <input type="number" id="t3_qty" placeholder="Кількість">
+        <button class="submit-btn" onclick="sendForm(3, ['t3_item', 't3_qty'])">Відправити в Книгу 3</button>
+    </div>
+
+    <div id="tab4" class="tab-content">
+        <h3>Вільне повідомлення</h3>
+        <textarea id="t4_text" rows="4" placeholder="Опишіть ситуацію..."></textarea>
+        <button class="submit-btn" onclick="sendForm(4, ['t4_text'])">Відправити в Книгу 4</button>
     </div>
 
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
+        const API_URL = "https://script.google.com/macros/s/AKfycbyNdorKK5zSPUFs_FrFI0P4jUvd_DPbJltZLrxydcMGMIMQrGofSZp2GM9QSWzy_86s9Q/exec";
 
-        // Отримуємо дані користувача автоматично
-        const user = tg.initDataUnsafe?.user;
-        const infoBox = document.getElementById('userInfoDisplay');
-        
-        if (user) {
-            infoBox.innerHTML = `Ви зайшли як: <b>${user.first_name}</b> (ID: ${user.id})`;
-        } else {
-            infoBox.innerHTML = "Дані користувача недоступні (відкрито не через Telegram)";
+        // 1. Завантаження довідника при старті (тільки один раз)
+        window.onload = function() {
+            fetch(API_URL)
+                .then(res => res.json())
+                .then(list => {
+                    const master = document.getElementById('masterDropdown');
+                    master.innerHTML = "";
+                    list.forEach(item => {
+                        let opt = document.createElement('option');
+                        opt.value = item;
+                        opt.textContent = item;
+                        master.appendChild(opt);
+                    });
+                });
+        };
+
+        function showTab(num) {
+            document.querySelectorAll('.tab-content, .tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab' + num).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
 
-        function openTab(evt, tabName) {
-            let tabContent = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContent.length; i++) {
-                tabContent[i].classList.remove("active");
-            }
-            let tabButtons = document.getElementsByClassName("tab-button");
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove("active");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-
-        function sendData() {
-            // URL вашого Google Script (залишається вашим)
-            const webAppUrl = "https://script.google.com/macros/s/AKfycbxrBusr0BL80kWUWvtoxoor_X5famyKzNZdGqSgToynxIcdB1YRe7Lh1Gh-__0gpApQ/exec"; 
+        function sendForm(tabIndex, fieldIds) {
+            const masterVal = document.getElementById('masterDropdown').value;
             
-            const data = {
-                // Дані з полів
-                name: document.getElementById('userName').value,
-                phone: document.getElementById('userPhone').value,
-                message: document.getElementById('userMsg').value,
-                // Автоматичні дані
-                tg_id: user ? user.id : "невідомо",
-                tg_user: user ? user.username : "немає",
-                tg_name: user ? user.first_name : "невідомо"
-            };
+            // Збираємо дані тільки з полів поточної вкладки
+            const extraData = fieldIds.map(id => document.getElementById(id).value);
 
-            if(!data.name || !data.phone) {
-                tg.showAlert("Будь ласка, заповніть Ім'я та Телефон!");
+            if (extraData.some(v => v === "")) {
+                tg.showAlert("Заповніть усі поля вкладки!");
                 return;
             }
 
-            // Повідомляємо про початок відправки
-            tg.MainButton.setText("Відправка...").show();
+            tg.MainButton.setText("Надсилаю у Книгу " + tabIndex).show();
 
-            fetch(webAppUrl, {
+            const payload = {
+                tabIndex: tabIndex,
+                masterValue: masterVal,
+                extraData: extraData,
+                tg_id: tg.initDataUnsafe?.user?.id || "N/A",
+                tg_name: tg.initDataUnsafe?.user?.first_name || "Guest"
+            };
+
+            fetch(API_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: JSON.stringify(data)
+                body: JSON.stringify(payload)
             }).then(() => {
                 tg.MainButton.hide();
-                tg.showAlert("Дані успішно надіслані, " + data.tg_name + "!");
-                tg.close();
-            }).catch(err => {
-                tg.MainButton.hide();
-                tg.showAlert("Помилка: " + err);
+                fieldIds.forEach(id => document.getElementById(id).value = ""); // Очистка
+                tg.showAlert("Дані успішно записані в окрему книгу " + tabIndex);
             });
         }
     </script>
