@@ -16,37 +16,32 @@
         
         /* Спільний довідник зверху */
         .master-section {
-        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Сучасні шрифти */
-        margin: 20px;
-        max-width: 400px;
+        font-family: sans-serif;
+        margin: 10px;
+        max-width: 300px; /* Обмежуємо ширину самого блоку */
     }
 
-    /* Стиль для підпису (Label) */
     .master-section label {
         display: block;
-        font-size: 16px;
+        font-size: 14px; /* Менший шрифт заголовка */
         font-weight: 600;
-        color: #333;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
+        color: #444;
     }
 
-    /* Стиль для самого випадаючого списку */
     #masterDropdown {
         width: 100%;
-        padding: 10px 15px;
-        font-size: 5px; /* Оптимальний розмір для читання */
-        font-family: inherit; /* Успадковує шрифт від контейнера */
-        color: #444;
+        height: 38px; /* Значно менша висота (стандарт для форм) */
+        padding: 0 10px;
+        font-size: 14px; /* Акуратний розмір тексту */
+        
+        border: 1px solid #ccc; /* Тонша рамка */
+        border-radius: 6px;    /* Легке закруглення */
         background-color: #fff;
-        border: 2px solid #d1d5db;
-        border-radius: 8px; /* Закруглені кути */
-        cursor: pointer;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        appearance: none; /* Прибираємо стандартну стрілку браузера (опціонально) */
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 10px center;
-        background-size: 1em;
+        
+        /* Стандартна стрілочка */
+        appearance: auto; 
+        -webkit-appearance: auto;
     }
 
     /* Ефект при фокусі (натисканні) */
