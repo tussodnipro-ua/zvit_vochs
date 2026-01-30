@@ -61,30 +61,32 @@
     </div>
 
     <div id="tab1" class="tab-content active">
-        <h3>Транспортні дані</h3>
-        <input type="text" id="t1_num" placeholder="Номер авто">
-        <input type="text" id="t1_driver" placeholder="ПІБ водія">
-        <button class="submit-btn" onclick="sendForm(1, ['t1_num', 't1_driver'])">Відправити в Книгу 1</button>
+        <h3>Данні про заступаючу зміну:</h3>
+        <input type="text" id="t1_col" placeholder="Кількість співробітників">
+        <input type="text" id="t1_st_ppo" placeholder="ПІБ ст. ППО">
+        <input type="text" id="t1_ppo_1" placeholder="ПІБ ППО 1">
+        <input type="text" id="t1_ppo_2" placeholder="ПІБ ППО 2">
+        <button class="submit-btn" onclick="sendForm(1, ['t1_num', 't1_driver'])">Відправити данні</button>
     </div>
 
     <div id="tab2" class="tab-content">
         <h3>Касовий звіт</h3>
         <input type="number" id="t2_amount" placeholder="Сума грн">
         <select id="t2_type"><option>Прихід</option><option>Розхід</option></select>
-        <button class="submit-btn" onclick="sendForm(2, ['t2_amount', 't2_type'])">Відправити в Книгу 2</button>
+        <button class="submit-btn" onclick="sendForm(2, ['t2_amount', 't2_type'])">Відправити данні</button>
     </div>
 
     <div id="tab3" class="tab-content">
         <h3>Інвентаризація</h3>
         <input type="text" id="t3_item" placeholder="Назва товару">
         <input type="number" id="t3_qty" placeholder="Кількість">
-        <button class="submit-btn" onclick="sendForm(3, ['t3_item', 't3_qty'])">Відправити в Книгу 3</button>
+        <button class="submit-btn" onclick="sendForm(3, ['t3_item', 't3_qty'])">Відправити данні</button>
     </div>
 
     <div id="tab4" class="tab-content">
         <h3>Вільне повідомлення</h3>
         <textarea id="t4_text" rows="4" placeholder="Опишіть ситуацію..."></textarea>
-        <button class="submit-btn" onclick="sendForm(4, ['t4_text'])">Відправити в Книгу 4</button>
+        <button class="submit-btn" onclick="sendForm(4, ['t4_text'])">Відправити данні</button>
     </div>
 
     <script>
@@ -125,7 +127,7 @@
                 return;
             }
 
-            tg.MainButton.setText("Надсилаю у Книгу " + tabIndex).show();
+            tg.MainButton.setText("Надсилаю данні " + tabIndex).show();
 
             const payload = {
                 tabIndex: tabIndex,
@@ -142,7 +144,7 @@
             }).then(() => {
                 tg.MainButton.hide();
                 fieldIds.forEach(id => document.getElementById(id).value = ""); // Очистка
-                tg.showAlert("Дані успішно записані в окрему книгу " + tabIndex);
+                tg.showAlert("Дані успішно записані передані " + tabIndex);
             });
         }
     </script>
