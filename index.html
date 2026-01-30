@@ -121,9 +121,9 @@
             // Збираємо дані тільки з полів поточної вкладки
             const extraData = fieldIds.map(id => document.getElementById(id).value);
 
-            if (extraData.some(v => v === "")) {
-                tg.showAlert("Заповніть усі поля вкладки!");
-                return;
+            //if (extraData.some(v => v === "")) {
+               // tg.showAlert("Заповніть усі поля вкладки!");
+            return;
             }
 
             tg.MainButton.setText("Надсилаю данні " + tabIndex).show();
