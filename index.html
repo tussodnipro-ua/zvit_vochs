@@ -16,13 +16,45 @@
         
         /* Спільний довідник зверху */
         .master-section {
-            background: var(--tg-sec-bg);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border: 1px solid var(--tg-hint);
-        }
-        .master-section label { font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px; }
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Сучасні шрифти */
+        margin: 20px;
+        max-width: 400px;
+    }
+
+    /* Стиль для підпису (Label) */
+    .master-section label {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    /* Стиль для самого випадаючого списку */
+    #masterDropdown {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 16px; /* Оптимальний розмір для читання */
+        font-family: inherit; /* Успадковує шрифт від контейнера */
+        color: #444;
+        background-color: #fff;
+        border: 2px solid #d1d5db;
+        border-radius: 8px; /* Закруглені кути */
+        cursor: pointer;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        appearance: none; /* Прибираємо стандартну стрілку браузера (опціонально) */
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 1em;
+    }
+
+    /* Ефект при фокусі (натисканні) */
+    #masterDropdown:focus {
+        outline: none;
+        border-color: #2563eb; /* Синій колір рамки */
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
 
         /* Навігація вкладок */
         .tabs { display: flex; gap: 5px; margin-bottom: 15px; overflow-x: auto; }
@@ -66,7 +98,7 @@
         <input type="text" id="t1_st_ppo" placeholder="ПІБ ст. ППО">
         <input type="text" id="t1_ppo_1" placeholder="ПІБ ППО 1">
         <input type="text" id="t1_ppo_2" placeholder="ПІБ ППО 2">
-        <button class="submit-btn" onclick="sendForm(1, ['t1_num', 't1_driver'])">Відправити данні</button>
+        <button class="submit-btn" onclick="sendForm(1, ['t1_col', 't1_st_ppo', 't1_ppo_1', 't1_ppo_2'])">Відправити данні</button>
     </div>
 
     <div id="tab2" class="tab-content">
